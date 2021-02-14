@@ -1,5 +1,16 @@
-import React from "react";
+import React {useState, useEffect} from "react";
+import axios from 'axios';
 import "./App.css";
+
+useEffect(() = {
+  axios.get('https://api.nasa.gov/planetary/apod')
+  .then(res => {
+    
+  })
+  .catch(err =>{
+    console.log("Error:", err)
+  })
+}, [])
 
 function App() {
   return (
