@@ -13,18 +13,20 @@ const Card = ({apod}) => {
 
     return (
         apod && 
-        <CardStrap style={{width: 300, display: 'block', overflow: 'auto', margin: '2em', backgroundColor: 'white', border: '1px solid black'}}>
+        <CardStrap 
+        className="shadow"
+        style={{width: 300, display: 'block', overflow: 'auto', margin: '2em', backgroundColor: 'white', border: '1px solid black'}}>
             
             <a 
                 href={`https://apod.nasa.gov/apod/ap${apod.date.split('-').join('').substring(2,8)}.html`}
                 target={"_blank"}>
-                <CardImg src={apod.url} alt={apod.title} style={{width: '100%', height:300}}/>
+                <CardImg src={apod.url} alt={apod.title} style={{width: '100%', height:300, borderRadius: 0}}/>
             </a>
             
             <CardBody>
-                <CardTitle tag="h4">{apod.title}</CardTitle>
-                <CardSubtitle tag="h6" className="text-muted">&copy; {apod.copyright}</CardSubtitle>
-                <CardText style={{textAlign: 'justify', padding: '0 1em'}}>
+                <CardTitle tag="h4" style={{minHeight: '4em'}}>{apod.title}</CardTitle>
+                <CardSubtitle tag="h6" className="text-muted" style={{minHeight: '2.5em'}}>&copy; {apod.copyright}</CardSubtitle>
+                <CardText style={{textAlign: 'justify', padding: '0 1em', minHeight: '12em'}}>
                     {apod.explanation.substring(0,200)}
                     {
                         more ? apod.explanation.substring(200, apod.explanation.length - 1)
