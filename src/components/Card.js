@@ -1,4 +1,8 @@
 import React, { useState } from 'react'
+import {
+    Card as CardStrap, CardImg, CardText, CardBody,
+    CardTitle, CardSubtitle, Button
+  } from 'reactstrap';
 
 const Card = ({apod}) => {
     const [more, setMore] = useState(false);
@@ -9,7 +13,7 @@ const Card = ({apod}) => {
 
     return (
         apod && 
-        <div style={{width: 300, display: 'block', overflow: 'auto', margin: '2em', backgroundColor: 'white', border: '1px solid black'}}>
+        <Card style={{width: 300, display: 'block', overflow: 'auto', margin: '2em', backgroundColor: 'white', border: '1px solid black'}}>
             
             <a 
                 href={`https://apod.nasa.gov/apod/ap${apod.date.split('-').join('').substring(2,8)}.html`}
@@ -27,7 +31,7 @@ const Card = ({apod}) => {
             </p>
             <p onClick={toggle} style={{cursor: 'pointer'}}>{more ? '-':'+'}</p>
             
-        </div>
+        </Card>
         
     )
 }
