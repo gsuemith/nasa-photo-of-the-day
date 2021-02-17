@@ -1,10 +1,14 @@
 import React from 'react'
 import Card from './Card'
 
-const Album = ({apod}) => {
+const Album = ({apod, images}) => {
     return (
-        <div>
+        <div className="album pictures">
             <Card apod={apod}/>
+            {images && 
+                images.map(image => {
+                    return <Card key={image.date} apod={image}/>
+            })}
         </div>
     )
 }

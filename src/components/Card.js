@@ -1,12 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Card = ({apod}) => {
+    const [more, setMore] = useState(false);
+
+    const toggle = () => {
+        setMore(!more);
+    }
+
     return (
-        <div>
-            {apod && 
-                <img src={apod.url} alt={apod.title}/>
-            }
+        apod && 
+        <div style={{width: 300, display: 'block', overflow: 'auto', margin: '2em', backgroundColor: 'white', border: '1px solid black'}}>
+            
+            <a 
+                href={`https://apod.nasa.gov/apod/ap${apod.date.split('-').join('').substring(2,8)}.html`}
+                target={"_blank"}>
+                <img src={apod.url} alt={apod.title} style={{width: '100%', height:300}}/>
+            </a>
+            
+            <h4>&copy; {apod.copyright}</h4>
+            <p style={{textAlign: 'justify', padding: '0 1em'}}>
+                {apod.explanation.substring(0,200)}
+                {
+                    more ? apod.explanation.substring(200, apod.explanation.length - 1)
+                    : ' . . .'
+                }
+            </p>
+            <p onClick={toggle} style={{cursor: 'pointer'}}>{more ? '-':'+'}</p>
+            
         </div>
+        
     )
 }
 // Example APOD data
