@@ -10,8 +10,7 @@ const date = '2021-02-14'
 function App() {
   const [image, setImage] = useState(null)
   const [images, setImages] = useState(null)
-  const [pause, setPause] = useState(null)
-
+  
   useEffect(() => {
     function get(){
       axios.get(`${url}?api_key=DEMO_KEY&date=${date}`)
@@ -28,7 +27,7 @@ function App() {
     get();
 
     return () => {}
-  }, [pause])
+  }, [])
   
   useEffect(() => {
     axios.get(`${url}?api_key=DEMO_KEY&count=24`)
@@ -37,7 +36,7 @@ function App() {
         setImages(res.data.filter(apod => apod.media_type === 'image'))
       })
       .catch(err => console.log("Error, err"))
-  }, [pause])
+  }, [])
 
   return (
 

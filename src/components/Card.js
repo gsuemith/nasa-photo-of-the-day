@@ -12,8 +12,8 @@ const Card = ({apod}) => {
         <div style={{width: 300, display: 'block', overflow: 'auto', margin: '2em', backgroundColor: 'white', border: '1px solid black'}}>
             
             <a 
-                href={`https://apod.nasa.gov/apod/ap${apod.date.split('-').join('').substring(2,8)}.html`}
-                target={"_blank"}>
+            href={`https://apod.nasa.gov/apod/ap${apod.date.split('-').join('').substring(2,8)}.html`}
+            target={"_blank"}>
                 <img src={apod.url} alt={apod.title} style={{width: '100%', height:300}}/>
             </a>
             
