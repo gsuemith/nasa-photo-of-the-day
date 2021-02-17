@@ -3,18 +3,17 @@ import Album from './components/Album.js'
 import axios from 'axios';
 import "./App.css";
 
-const url = `https://api.nasa.gov/planetary/apod`
-const date = '2021-02-14'
-
+const URL = `https://api.nasa.gov/planetary/apod`
+const DATE = '2021-02-14'
+const API_KEY = 'ArPgFY87J422ZogJ4c4ybXxYz9x2KJgcsec76N1a'
 
 function App() {
   const [image, setImage] = useState(null)
   const [images, setImages] = useState(null)
-  const [pause, setPause] = useState(null)
 
   useEffect(() => {
     function get(){
-      axios.get(`${url}?api_key=DEMO_KEY&date=${date}`)
+      axios.get(`${URL}?api_key=${API_KEY}&date=${DATE}`)
         .then(res => {
           console.log(res)
           setImage(res.data)
@@ -28,16 +27,16 @@ function App() {
     get();
 
     return () => {}
-  }, [pause])
+  }, [])
   
   useEffect(() => {
-    axios.get(`${url}?api_key=DEMO_KEY&count=24`)
+    axios.get(`${URL}?api_key=${API_KEY}&count=24`)
       .then(res => {
         console.log(res.data);
         setImages(res.data.filter(apod => apod.media_type === 'image'))
       })
       .catch(err => console.log("Error, err"))
-  }, [pause])
+  }, [])
 
   return (
 
