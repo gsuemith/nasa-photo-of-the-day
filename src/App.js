@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import Album from './components/Album.js'
 import axios from 'axios';
 import "./App.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const URL = `https://api.nasa.gov/planetary/apod`
 const DATE = '2021-02-14'
