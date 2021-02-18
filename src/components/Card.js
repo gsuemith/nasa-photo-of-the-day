@@ -6,7 +6,7 @@ import {
 
 const Card = ({apod}) => {
     const [more, setMore] = useState(false);
-
+    const featured = false;
     const toggle = () => {
         setMore(!more);
     }
@@ -15,7 +15,7 @@ const Card = ({apod}) => {
         apod && 
         <CardStrap 
         className="shadow"
-        style={{width: 300, display: 'block', overflow: 'auto', margin: '1em', backgroundColor: 'white', borderRadius: 0}}>
+        style={{width: featured? 600: 300, display: 'block', overflow: 'auto', margin: '1em', backgroundColor: 'white', borderRadius: 0}}>
             
             <a 
                 href={`https://apod.nasa.gov/apod/ap${apod.date.split('-').join('').substring(2,8)}.html`}

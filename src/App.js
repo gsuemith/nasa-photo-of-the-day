@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
-import Album from './components/Album.js'
+import Album from './components/Album'
+import FeaturedPhoto from './components/FeaturedPhoto'
 import axios from 'axios';
 import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -46,6 +47,7 @@ function App() {
         Read through the instructions in the README.md file to build your NASA
         app! Have fun <span role="img" aria-label='go!'>🚀</span>!
       </p>
+      {image && <FeaturedPhoto apod={image}/>}
       <Album apod={image} images={images}/>
     </div>
   );
