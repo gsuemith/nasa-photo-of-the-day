@@ -12,10 +12,15 @@ const API_KEY = 'ArPgFY87J422ZogJ4c4ybXxYz9x2KJgcsec76N1a'
 function App() {
   const [image, setImage] = useState(null)
   const [images, setImages] = useState(null)
+  const [date, setDate] = useState((() => {
+    let today = new Date()
+    today = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`
+    return today
+  })())
 
   useEffect(() => {
     function get(){
-      axios.get(`${URL}?api_key=${API_KEY}&date=${DATE}`)
+      axios.get(`${URL}?api_key=${API_KEY}&date=${date}`)
         .then(res => {
           console.log(res)
           setImage(res.data)
@@ -23,13 +28,10 @@ function App() {
         .catch(err =>{
           console.log("Error:", err)
         })
-        console.log("ran")
       }
 
     get();
-
-    return () => {}
-  }, [])
+  }, [date])
   
   useEffect(() => {
     axios.get(`${URL}?api_key=${API_KEY}&count=24`)
@@ -47,7 +49,7 @@ function App() {
         Read through the instructions in the README.md file to build your NASA
         app! Have fun <span role="img" aria-label='go!'>🚀</span>!
       </p>
-      {image && <FeaturedPhoto apod={image}/>}
+      {image && <FeaturedPhoto date={date} setDate={setDate}/>}
       <Album apod={image} images={images}/>
     </div>
   );

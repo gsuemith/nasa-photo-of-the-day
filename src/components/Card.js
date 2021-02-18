@@ -4,9 +4,8 @@ import {
     CardTitle, CardSubtitle, Button
   } from 'reactstrap';
 
-const Card = ({apod}) => {
+const Card = ({apod, featured}) => {
     const [more, setMore] = useState(false);
-    const featured = false;
     const toggle = () => {
         setMore(!more);
     }
@@ -15,18 +14,21 @@ const Card = ({apod}) => {
         apod && 
         <CardStrap 
         className="shadow"
-        style={{width: featured? 600: 300, display: 'block', overflow: 'auto', margin: '1em', backgroundColor: 'white', borderRadius: 0}}>
+        style={{width: (featured ? 630: 300), display: 'block', overflow: 'auto', margin: '1em', backgroundColor: 'white', borderRadius: 0}}>
             
             <a 
                 href={`https://apod.nasa.gov/apod/ap${apod.date.split('-').join('').substring(2,8)}.html`}
                 target={"_blank"}>
-                <CardImg src={apod.url} alt={apod.title} style={{width: '100%', height:300, borderRadius: 0}}/>
+                <CardImg 
+                src={apod.media_type === 'image' ? //Placeholder image for videos
+                apod.url : 'https://apod.nasa.gov/apod/image/9805/ladder_a11.jpg'} 
+                alt={apod.title} style={{width: '100%', height:(featured ? 630: 300), borderRadius: 0}}/>
             </a>
             
             <CardBody>
-                <CardTitle tag="h4" style={{minHeight: '4em'}}>{apod.title}</CardTitle>
-                <CardSubtitle tag="h6" className="text-muted" style={{minHeight: '2.5em'}}>&copy; {apod.copyright}</CardSubtitle>
-                <CardText style={{textAlign: 'justify', padding: '0 1em', minHeight: '12em'}}>
+                <CardTitle tag="h4" style={{minHeight: featured ? '2em': '4em'}}>{apod.title}</CardTitle>
+                <CardSubtitle tag="h6" className="text-muted" style={{minHeight: featured ? '1em': '2.5em'}}>&copy; {apod.copyright}</CardSubtitle>
+                <CardText style={{textAlign: 'justify', padding: '0 1em', minHeight: (featured ? '3em': '12em')}}>
                     {apod.explanation.substring(0,200)}
                     {
                         more ? apod.explanation.substring(200, apod.explanation.length - 1)
