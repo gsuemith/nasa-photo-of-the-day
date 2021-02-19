@@ -14,7 +14,7 @@ const Card = ({apod, featured}) => {
         apod && 
         <CardStrap 
         className="shadow"
-        style={{width: (featured ? 630: 300), display: 'block', overflow: 'auto', margin: '1em', backgroundColor: 'white', borderRadius: 0}}>
+        style={{width: (featured ? 630: 300), margin: '1em', backgroundColor: 'white', borderRadius: 0}}>
             
             <a 
                 href={`https://apod.nasa.gov/apod/ap${apod.date.split('-').join('').substring(2,8)}.html`}
