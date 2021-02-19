@@ -3,6 +3,7 @@ import {
     Card as CardStrap, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button
   } from 'reactstrap';
+import { keyframes } from 'styled-components'
 
 const Card = ({apod, featured}) => {
     const [more, setMore] = useState(false);
@@ -13,29 +14,41 @@ const Card = ({apod, featured}) => {
     return (
         apod && 
         <CardStrap 
-        className="shadow"
-        style={{width: (featured ? 630: 300), margin: '1em', backgroundColor: 'white', borderRadius: 0}}>
+        className="shadow m-3 bg-light rounded-0"
+        style={{width: featured ? 630: 300}}>
             
             <a 
                 href={`https://apod.nasa.gov/apod/ap${apod.date.split('-').join('').substring(2,8)}.html`}
                 target={"_blank"}>
                 <CardImg 
-                src={apod.media_type === 'image' ? //Placeholder image for videos
-                apod.url : 'https://apod.nasa.gov/apod/image/9805/ladder_a11.jpg'} 
-                alt={apod.title} style={{width: '100%', height:(featured ? 630: 300), borderRadius: 0}}/>
+                    src={apod.media_type === 'image' 
+                        ? apod.url       //vvv Placeholder image for videos vvv
+                        : 'https://apod.nasa.gov/apod/image/9805/ladder_a11.jpg'} 
+                    alt={apod.title} 
+                    style={{width: '100%', height:(featured ? 630: 300), borderRadius: 0}}
+                />
             </a>
             
             <CardBody>
-                <CardTitle tag="h4" style={{minHeight: featured ? '2em': '4em'}}>{apod.title}</CardTitle>
-                <CardSubtitle tag="h6" className="text-muted" style={{minHeight: featured ? '1em': '2.5em'}}>&copy; {apod.copyright}</CardSubtitle>
-                <CardText style={{textAlign: 'justify', padding: '0 1em', minHeight: (featured ? '3em': '12em')}}>
+                <CardSubtitle tag="h7" className="text-muted">
+                    {(new Date(apod.date)).toLocaleDateString('en-US', {month: 'short', day:'numeric', year: 'numeric'})}
+                </CardSubtitle>
+                <CardTitle tag="h4" style={{minHeight: featured ? '2em': '4em'}}>
+                    {apod.title}
+                </CardTitle>
+                <CardSubtitle tag="h6" className="text-muted" style={{minHeight: featured ? '1em': '2.5em'}}>
+                    &copy; {apod.copyright}
+                </CardSubtitle>
+                <CardText className="text-justify py-0 px-3 h-30" style={{minHeight: featured ? '3em': '12em'}}>
                     {apod.explanation.substring(0,200)}
                     {
                         more ? apod.explanation.substring(200, apod.explanation.length - 1)
                         : ' . . .'
                     }
                 </CardText>
-                <Button onClick={toggle} style={{cursor: 'pointer', margin: '1em'}} color="info">{more ? '-':'+'}</Button>
+                <Button onClick={toggle} style={{cursor: 'pointer', margin: '1em'}} color="info">
+                    {more ? '-':'+'}
+                </Button>
               
             </CardBody>
             
