@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import {
     Card as CardStrap, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button
+    CardTitle, CardSubtitle, Button, Collapse
   } from 'reactstrap';
-import { keyframes } from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
+// const kf = styled.keyframes`
+  
+// `
 const Card = ({apod, featured}) => {
     const [more, setMore] = useState(false);
     const toggle = () => {
@@ -15,7 +18,7 @@ const Card = ({apod, featured}) => {
         apod && 
         <CardStrap 
         className="shadow m-3 bg-light rounded-0"
-        style={{width: featured ? 630: 300}}>
+        style={{width: featured ? 630: 300, transition: 'height 1s ease-in-out'}}>
             
             <a 
                 href={`https://apod.nasa.gov/apod/ap${apod.date.split('-').join('').substring(2,8)}.html`}
@@ -39,14 +42,16 @@ const Card = ({apod, featured}) => {
                 <CardSubtitle tag="h6" className="text-muted" style={{minHeight: featured ? '1em': '2.5em'}}>
                     &copy; {apod.copyright}
                 </CardSubtitle>
+                
                 <CardText className="text-justify py-0 px-3 h-30" style={{minHeight: featured ? '3em': '12em'}}>
-                    {apod.explanation.substring(0,200)}
-                    {
-                        more ? apod.explanation.substring(200, apod.explanation.length - 1)
-                        : ' . . .'
-                    }
+                    {!more && apod.explanation.substring(0,200) + ' . . .'}
+                    <Collapse isOpen={more}>
+                        {apod.explanation}
+                    </Collapse>
                 </CardText>
-                <Button onClick={toggle} style={{cursor: 'pointer', margin: '1em'}} color="info">
+                
+                
+                <Button onClick={toggle} color={more ? "warning":"info"}>
                     {more ? '-':'+'}
                 </Button>
               
